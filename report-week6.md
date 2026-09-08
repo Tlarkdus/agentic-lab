@@ -3,7 +3,7 @@
 ## 완료한 LAB 체크리스트
 
 - [x] LAB 01
-- [ ] LAB 02
+- [x] LAB 02
 - [ ] LAB 03
 - [ ] LAB 04
 - [ ] LAB 05
@@ -28,9 +28,13 @@
 
 ### LAB 02
 
-- **산출물 경로**:
-- **핵심 증거**:
-- **관찰**:
+- **산출물 경로**: `.claude/settings.local.json` (allow 25건 → 11건). 백업: scratchpad/`settings.local.json.bak`
+- **핵심 증거**: `grep -rn "^import|require("` 전수 조사 — 살아있는 그래프는 `tests/refund.test.js` →
+  `src/payments/refund.js` → `lib/logger.js` 하나뿐. 후보표 9행(제거 3 / 보류 4 / 해당없음·오탐 2),
+  제거 14건(타 저장소 9, 위험·1회성 5), `npm test` 10/10 pass
+- **관찰**: 죽은 코드보다 죽은 **권한**이 위험했다 — `rm -f CLAUDE.md GOLDEN_RULES.md ...`가 allow 목록에
+  남아 헌법 파일 삭제가 무승인 통과되는 상태였다. 그런데 이 파일은 gitignore라 정리 사실이 커밋으로
+  증명되지 않는다. git 밖 자산은 일지에 적어야만 남는다.
 
 ### LAB 03
 
