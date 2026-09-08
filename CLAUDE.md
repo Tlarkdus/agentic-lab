@@ -2,18 +2,32 @@
 
 절대 위반 금지 규칙: @GOLDEN_RULES.md
 
-## 결제 코드 규칙
+## 행동 원칙
 
-1. **활성 결제 코드는 `src/payments/` 뿐이다.**
-   `src/billing/`, `src/old/`는 DEPRECATED — 수정하지도, import 하지도, 참고하지도 말 것.
-   같은 이름의 함수가 거기 있어도 그건 죽은 코드다.
+1. **Think Before Coding** — 불확실하면 추측하지 말고 묻는다.
+   물을 수 없으면 세운 가정을 먼저 적고 시작한다.
+2. **Simplicity First** — 요구를 만족하는 최소 코드만 쓴다.
+   "나중에 쓸지도"를 위한 추상화·설정·레이어는 만들지 않는다.
+3. **Surgical Changes** — 요청 범위 밖의 코드·주석·포맷은 건드리지 않는다.
+   리팩터링이 필요해 보이면 하지 말고 말한다.
+4. **Goal-Driven** — 작업 전에 "무엇으로 끝났음을 증명할지"를 정한다.
+   증명은 `npm test` 통과로 확인한다.
 
-2. **금액은 항상 전(minor unit) 정수로 다룬다.**
-   100전 = 1원. 부동소수 금액 금지. 필드명은 `amountMinor`처럼 `Minor` 접미사를 붙인다.
+## 구조
 
-3. **결제 관련 로그는 `lib/logger.js`의 `logPayment()`만 사용한다.**
-   `console.log`, 직접 만든 로거 금지.
+- 활성 결제 코드: `src/payments/` — **여기만 수정한다.**
+- `src/billing/`, `src/old/`: DEPRECATED. 수정·import·참고 전부 금지.
+  같은 이름의 함수가 있어도 죽은 코드다.
+- 로거: `lib/logger.js` / 테스트: `tests/`
 
-4. **코드를 고쳤으면 반드시 `npm test`를 돌려 통과를 확인한다.**
+## 명령어
 
-5. 자세한 환불·검증 규칙은 @docs/payment-rules.md 참조.
+- `npm test` — 코드를 고쳤으면 반드시 돌려 통과를 확인한다.
+
+## 금지사항
+
+- 부동소수 금액. 금액은 항상 전(minor unit) 정수, 필드명은 `amountMinor`처럼 `Minor` 접미사.
+- 결제 로그에 `console.log`나 자체 로거. `logPayment()`만 쓴다.
+- 실패를 정상 반환값으로 감추기. 결제 실패는 던진다.
+
+자세한 환불·검증 규칙: @docs/payment-rules.md
