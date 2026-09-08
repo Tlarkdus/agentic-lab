@@ -2,6 +2,8 @@
 
 절대 위반 금지 규칙: @GOLDEN_RULES.md
 
+규칙이 충돌하면 좁은 범위가 이긴다: `GOLDEN_RULES.md` > 폴더별 `.agent-rules.md` > 이 파일 > 전역 `~/.claude/CLAUDE.md`.
+
 ## 행동 원칙
 
 1. **Think Before Coding** — 불확실하면 추측하지 말고 묻는다.
