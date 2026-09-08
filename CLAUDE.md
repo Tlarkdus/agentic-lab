@@ -15,10 +15,8 @@
 ## 구조
 
 - 활성 결제 코드: `src/payments/` — **여기만 수정한다.**
-- `src/billing/`, `src/old/`: DEPRECATED. 수정·import·참고 전부 금지.
-  같은 이름의 함수가 있어도 죽은 코드다.
-- 로거: `lib/logger.js` / 테스트: `tests/`
-- 상세 규칙: `docs/payment-rules.md`, `src/payments/.agent-rules.md`
+- `src/billing/`, `src/old/`: DEPRECATED. 수정·import·참고 전부 금지 — 같은 이름의 함수가 있어도 죽은 코드다.
+- 로거: `lib/logger.js` / 테스트: `tests/` / 상세 규칙: `docs/payment-rules.md`, `src/payments/.agent-rules.md`
 - `.claude/`: 커맨드 `commands/payment-feature.md` (`/payment-feature`), 스킬 `skills/repo-grade/` (`/repo-grade`)
 
 ## 명령어
@@ -28,8 +26,13 @@
 ## 금지사항
 
 - 부동소수 금액. 금액은 항상 전(minor unit) 정수, 필드명은 `amountMinor`처럼 `Minor` 접미사.
-- 결제 로그에 `console.log` 직접 호출이나 자체 로거. 출력은 `logPayment()`로만 한다.
-  (`lib/logger.js` 내부의 `console.log`가 유일한 출력 지점이자 유일한 예외다.)
+- 결제 로그에 `console.log` 직접 호출이나 자체 로거. 출력은 `logPayment()`로만 한다 (`lib/logger.js` 내부가 유일한 예외).
 - 실패를 정상 반환값으로 감추기. 결제 실패는 던진다.
 
-자세한 환불·검증 규칙: @docs/payment-rules.md
+## 지식 저장소(_brain) 규칙
+
+- 팀 지식은 `_brain/` 아래 markdown으로만: `index.md`(목차), `log.md`(변경 기록), `decision/`, `meeting/`, `postmortem/`
+- 노드 frontmatter에 `status`(stub/draft/solid)와 `sources`(원본 경로 목록). 본문은 `[[다른노드]]`로 잇는다.
+- 원본(raw)은 수정 금지. 모순된 정보는 지우지 말고 "모순/주의" 섹션에 병기. 키·개인정보는 `_brain/`에 넣지 않는다.
+
+자세한 환불·검증 규칙: @docs/payment-rules.md / 지식 저장소 목차: @_brain/index.md
