@@ -2,7 +2,7 @@
 
 ## 완료한 LAB 체크리스트
 
-- [ ] LAB 01
+- [x] LAB 01
 - [ ] LAB 02
 - [ ] LAB 03
 - [ ] LAB 04
@@ -18,9 +18,13 @@
 
 ### LAB 01
 
-- **산출물 경로**:
-- **핵심 증거**:
-- **관찰**:
+- **산출물 경로**: `CLAUDE.md` (+ `GOLDEN_RULES.md`, `src/payments/.agent-rules.md`)
+- **핵심 증거**: 감사 판정표 14행(조항 | 판정 | 근거 파일 | 수정 제안) — 유효 12 / 모순 1 / 낡음 1.
+  커밋 `2c20069 docs: audit fix` (모순·낡음 3건 수정), `58b6167`·`3505299 docs: revise from session (week6)`
+  (규칙 충돌 우선순위 조항, 행동 원칙 5번 신설). 대조 근거: `npm test` 10/10 pass, `grep console.log` 결과,
+  `git show HEAD:CLAUDE.md`
+- **관찰**: 헌법을 재구술시키니 "결제 로그에 `console.log` 금지" 한 문장이 두 가지로 읽힌다는 걸 알았다 —
+  호출부 금지인지 `lib/logger.js` 구현까지 금지인지. 문자 그대로면 승인된 로거 자체가 규칙 위반이었다.
 
 ### LAB 02
 
