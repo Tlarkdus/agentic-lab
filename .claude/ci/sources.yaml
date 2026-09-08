@@ -1,0 +1,23 @@
+# 이 저장소에서 agent가 답을 찾을 때 봐야 할 모든 곳.
+# 실재하는 경로만 적는다. 없는 경로는 넣지 않는다.
+
+code:
+  - src/            # 결제 로직. 활성은 src/payments/ 뿐, billing·old는 DEPRECATED
+  - tests/          # node --test 스위트. 규칙이 코드로 고정된 자리
+  - package.json    # 실행 명령(scripts.test)과 모듈 방식("type": "module")
+
+rules:
+  - CLAUDE.md       # 헌법. 행동 원칙·구조·명령어·금지사항·_brain 규칙
+  - GOLDEN_RULES.md # 예외 없는 절대 규칙 5개. 충돌 시 최우선
+
+knowledge:
+  - _brain/index.md      # 위키 목차. 어떤 노드가 있는지는 항상 여기부터
+  - _brain/decision/     # 확정된 팀 결정(solid)과 미결 항목(draft)
+
+reports:
+  - report-week6.md # 6주차 실습 일지. LAB별 산출물·증거·관찰
+
+external:
+  - name: 예시-플러그인
+    url: github.com/jha0313/agentic-eng-plugin
+    note: 팀 플러그인 구조 참고
