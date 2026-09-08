@@ -6,16 +6,11 @@
 
 ## 행동 원칙
 
-1. **Think Before Coding** — 불확실하면 추측하지 말고 묻는다.
-   물을 수 없으면 세운 가정을 먼저 적고 시작한다.
-2. **Simplicity First** — 요구를 만족하는 최소 코드만 쓴다.
-   "나중에 쓸지도"를 위한 추상화·설정·레이어는 만들지 않는다.
-3. **Surgical Changes** — 요청 범위 밖의 코드·주석·포맷은 건드리지 않는다.
-   리팩터링이 필요해 보이면 하지 말고 말한다.
-4. **Goal-Driven** — 작업 전에 "무엇으로 끝났음을 증명할지"를 정한다.
-   증명은 `npm test` 통과로 확인한다.
-5. **Rules in the Commit** — 규칙 문서(`CLAUDE.md`·`GOLDEN_RULES.md`·`.agent-rules.md`) 변경은 같은 커밋에 넣는다.
-   커밋되지 않은 규칙은 없는 규칙이다.
+1. **Think Before Coding** — 불확실하면 추측하지 말고 묻는다. 물을 수 없으면 세운 가정을 먼저 적고 시작한다.
+2. **Simplicity First** — 요구를 만족하는 최소 코드만 쓴다. "나중에 쓸지도"를 위한 추상화·설정·레이어는 만들지 않는다.
+3. **Surgical Changes** — 요청 범위 밖의 코드·주석·포맷은 건드리지 않는다. 리팩터링이 필요해 보이면 하지 말고 말한다.
+4. **Goal-Driven** — 작업 전에 "무엇으로 끝났음을 증명할지"를 정한다. 증명은 `npm test` 통과로 확인한다.
+5. **Rules in the Commit** — 규칙 문서(`CLAUDE.md`·`GOLDEN_RULES.md`·`.agent-rules.md`) 변경은 같은 커밋에 넣는다. 커밋되지 않은 규칙은 없는 규칙이다.
 
 ## 구조
 
