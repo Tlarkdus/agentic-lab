@@ -19,7 +19,7 @@
   같은 이름의 함수가 있어도 죽은 코드다.
 - 로거: `lib/logger.js` / 테스트: `tests/`
 - 상세 규칙: `docs/payment-rules.md`, `src/payments/.agent-rules.md`
-- 워크플로우 커맨드: `.claude/commands/payment-feature.md` (`/payment-feature`)
+- `.claude/`: 커맨드 `commands/payment-feature.md` (`/payment-feature`), 스킬 `skills/repo-grade/` (`/repo-grade`)
 
 ## 명령어
 
