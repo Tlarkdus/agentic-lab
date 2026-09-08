@@ -19,6 +19,8 @@
 - `src/billing/`, `src/old/`: DEPRECATED. 수정·import·참고 전부 금지.
   같은 이름의 함수가 있어도 죽은 코드다.
 - 로거: `lib/logger.js` / 테스트: `tests/`
+- 상세 규칙: `docs/payment-rules.md`, `src/payments/.agent-rules.md`
+- 워크플로우 커맨드: `.claude/commands/payment-feature.md` (`/payment-feature`)
 
 ## 명령어
 
@@ -27,7 +29,8 @@
 ## 금지사항
 
 - 부동소수 금액. 금액은 항상 전(minor unit) 정수, 필드명은 `amountMinor`처럼 `Minor` 접미사.
-- 결제 로그에 `console.log`나 자체 로거. `logPayment()`만 쓴다.
+- 결제 로그에 `console.log` 직접 호출이나 자체 로거. 출력은 `logPayment()`로만 한다.
+  (`lib/logger.js` 내부의 `console.log`가 유일한 출력 지점이자 유일한 예외다.)
 - 실패를 정상 반환값으로 감추기. 결제 실패는 던진다.
 
 자세한 환불·검증 규칙: @docs/payment-rules.md
