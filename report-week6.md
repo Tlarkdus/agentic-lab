@@ -28,13 +28,20 @@
 
 ### LAB 02
 
-- **산출물 경로**: `.claude/settings.local.json` (allow 25건 → 11건). 백업: scratchpad/`settings.local.json.bak`
-- **핵심 증거**: `grep -rn "^import|require("` 전수 조사 — 살아있는 그래프는 `tests/refund.test.js` →
-  `src/payments/refund.js` → `lib/logger.js` 하나뿐. 후보표 9행(제거 3 / 보류 4 / 해당없음·오탐 2),
-  제거 14건(타 저장소 9, 위험·1회성 5), `npm test` 10/10 pass
-- **관찰**: 죽은 코드보다 죽은 **권한**이 위험했다 — `rm -f CLAUDE.md GOLDEN_RULES.md ...`가 allow 목록에
-  남아 헌법 파일 삭제가 무승인 통과되는 상태였다. 그런데 이 파일은 gitignore라 정리 사실이 커밋으로
-  증명되지 않는다. git 밖 자산은 일지에 적어야만 남는다.
+- **산출물 경로**: `.claude/skills/repo-grade/SKILL.md` (5카테고리 × 20점 루브릭),
+  `CLAUDE.md`, `.claude/settings.local.json` (allow 25건 → 11건, 백업 scratchpad/`settings.local.json.bak`)
+- **핵심 증거 (채점·개선)**: 스킬 커밋 `117f52b`. 채점 80/100 (A20 B10 C20 D20 E10) →
+  ROI #1 `8774e45` CLAUDE.md 40줄→35줄로 B 10→20 → ROI #2 `4530ac0` 구조 섹션에 스킬 기재로 E 10→20 →
+  **100/100**. 매 단계 `npm test` 10/10 pass
+- **핵심 증거 (sanity)**: `grep -rn "^import|require("` 전수 조사 — 살아있는 그래프는
+  `tests/refund.test.js` → `src/payments/refund.js` → `lib/logger.js` 하나뿐. 후보표 9행,
+  제거 14건(타 저장소 9, 위험·1회성 5), 보류 4건. 커밋 `b819270`
+- **관찰 1**: 내가 만든 루브릭이 내가 방금 추가한 줄을 잡았다 — 규칙을 더할수록 헌법이 40줄로 불어나
+  B가 감점됐다. 채점 기준을 스스로 어긴 걸 스스로 찾는 게 스킬의 값어치였다.
+- **관찰 2**: 재검증을 시키니 E 감점 근거 2건이 모두 무너졌다(폴더 규칙은 범위상 옳았고, `ts`는 로거 내부
+  생성 필드였다). 점수는 80으로 같았지만 "맞는 점수를 틀린 이유로" 낸 상태였다.
+- **관찰 3**: 죽은 코드보다 죽은 **권한**이 위험했다 — `rm -f CLAUDE.md GOLDEN_RULES.md ...`가 allow에 남아
+  헌법 파일 삭제가 무승인 통과되는 상태였다. gitignore 대상이라 정리가 커밋으로 증명되지 않는다.
 
 ### LAB 03
 
