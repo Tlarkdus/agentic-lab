@@ -14,6 +14,8 @@
    리팩터링이 필요해 보이면 하지 말고 말한다.
 4. **Goal-Driven** — 작업 전에 "무엇으로 끝났음을 증명할지"를 정한다.
    증명은 `npm test` 통과로 확인한다.
+5. **Rules in the Commit** — 규칙 문서(`CLAUDE.md`·`GOLDEN_RULES.md`·`.agent-rules.md`) 변경은 같은 커밋에 넣는다.
+   커밋되지 않은 규칙은 없는 규칙이다.
 
 ## 구조
 
