@@ -30,7 +30,9 @@
 
 - **산출물 경로**: `.claude/skills/repo-grade/SKILL.md` (5카테고리 × 20점 루브릭),
   `CLAUDE.md`, `.claude/settings.local.json` (allow 25건 → 11건, 백업 scratchpad/`settings.local.json.bak`)
-- **핵심 증거 (채점·개선)**: 스킬 커밋 `117f52b`. 채점 80/100 (A20 B10 C20 D20 E10) →
+- **핵심 증거 (채점·개선)**: 스킬 커밋 `117f52b`. 첫 채점 80/100 (A20 B10 C20 D20 E10),
+  최저 카테고리 B·E 동률 10점. ROI 3: ① CLAUDE.md 감량 +10 ② 구조 섹션에 스킬 기재 +10
+  ③ 코드 git 추적 +0(방어 — 현재 점수는 워킹트리 기준, 클론에선 A·D가 함께 무너짐) →
   ROI #1 `8774e45` CLAUDE.md 40줄→35줄로 B 10→20 → ROI #2 `4530ac0` 구조 섹션에 스킬 기재로 E 10→20 →
   **100/100**. 매 단계 `npm test` 10/10 pass
 - **핵심 증거 (sanity)**: `grep -rn "^import|require("` 전수 조사 — 살아있는 그래프는
