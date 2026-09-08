@@ -4,7 +4,7 @@
 
 - [x] LAB 01
 - [x] LAB 02
-- [ ] LAB 03
+- [x] LAB 03
 - [ ] LAB 04
 - [ ] LAB 05
 - [ ] LAB 06
@@ -47,9 +47,21 @@
 
 ### LAB 03
 
-- **산출물 경로**:
-- **핵심 증거**:
-- **관찰**:
+- **산출물 경로**: `_brain/` (index.md, log.md, raw/ 2건, decision/ 3노드, postmortem/ 1노드),
+  `CLAUDE.md` "지식 저장소(_brain) 규칙" 섹션, `.claude/skills/wiki-ingest/SKILL.md`,
+  `.claude/skills/wiki-query/SKILL.md`
+- **핵심 증거**: `779ae53` 스키마 층(위치·status/sources·[[링크]]·raw 불변·모순 병기·민감정보 배제,
+  35줄→38줄 허용치 내) → `a73435a` raw 노트 2건 원본 보관 → `1069dd8` 첫 ingest
+  (raw 2건 → 노드 4개: repo-standards/team-toolchain solid, audit-log draft, observations solid;
+  index.md·log.md 신설, raw 무수정을 git status로 확인) → `947508e` wiki-query.
+  질의 2건 대조: 인용 답변(게이트=npm test, 5주차 8/6 — 노드 + raw 원문 2단 인용) /
+  "아직 없음" 답변(luna-plugin 롤백 절차 — `grep -rn` 0건 근거)
+- **관찰 1**: 원본을 안 고치니 모순이 사라지지 않고 남았다 — 5주차 "CLAUDE.md 35줄 이내" vs 현재 38줄이
+  `repo-standards`의 "모순/주의"에 출처·커밋과 함께 병기됐다. 지웠으면 규정 개정 안건 자체가 증발했다.
+- **관찰 2**: 조회 스킬의 값어치는 "없다"고 말할 수 있는 데서 나왔다. `team-toolchain`에 luna-plugin이
+  적혀 있는데도 롤백 절차로 넘겨짚지 않은 답변이, 인용 답변 쪽 신뢰의 근거가 된다.
+- **관찰 3**: 노드화하자마자 파일 남발 유혹이 바로 왔다. 추출 항목 9개를 노드 4개로 묶고,
+  raw가 이미 회의록이라 `meeting/`은 만들지 않았으며, 정의가 없는 용어는 stub 대신 index 한 줄로 남겼다.
 
 ### LAB 04
 
