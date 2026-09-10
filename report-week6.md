@@ -6,12 +6,12 @@
 - [x] LAB 02
 - [x] LAB 03
 - [x] LAB 04
-- [ ] LAB 05
+- [x] LAB 05
 - [x] LAB 06
 - [ ] LAB 07
 - [ ] LAB 08
 - [ ] LAB 09
-- [ ] LAB 10
+- [x] LAB 10
 - [ ] LAB 11
 
 ## LAB별 기록
@@ -84,9 +84,36 @@
 
 ### LAB 05
 
-- **산출물 경로**:
-- **핵심 증거**:
-- **관찰**:
+- **산출물 경로**: `C:\Users\sgy46\luna-plugin` (= https://github.com/Tlarkdus/luna-plugin, `main`) —
+  `.claude-plugin/marketplace.json`(매장 `luna`), `luna-toolkit/.claude-plugin/plugin.json`(상품),
+  `commands/repo-grade.md`, `skills/repo-grade/SKILL.md`, `hooks/hooks.json`, `scripts/tdd-guard.sh`
+- **핵심 증거 (5-1~5-4)**: 커밋 `df2a0f8`(뼈대) → `524e2aa`(커맨드+스킬) → `64a58cc`(훅 2종) → `da65366`(README).
+  설치 `✓ Installed luna-toolkit. Plugin is now active.` —
+  `~/.claude/plugins/installed_plugins.json`에 `luna-toolkit@luna` scope `user`, `gitCommitSha da65366`.
+  훅 경로는 `${CLAUDE_PLUGIN_ROOT}` 기준 2곳(`hooks.json:9`, `commands/repo-grade.md:5`)
+- **핵심 증거 (5-5 타 폴더 검증)**: `plugin-test`(로컬 `.claude/skills/` 없음)에서 `/repo-grade` → **0/100**.
+  루브릭 5항목의 0점 조건("문서가 없다"·"CLAUDE.md가 없다"·"테스트가 없다")을 전부 만족하는 빈 저장소라
+  0점이 정상 동작의 증거
+- **핵심 증거 (5-6 갱신)**: `97b3136`으로 총평 행 규칙 추가 + version 0.1.1 →
+  `/plugin marketplace update luna` → `✔ Updated 1 marketplace (1 plugin bumped)`,
+  캐시에 `0.1.0`·`0.1.1`·`0.1.2` 세 디렉터리 생성 확인
+- **관찰 1 (배포판은 원본이 없는 곳에서만 검증된다)**: v0.1.1 갱신 후 작업 저장소에서 `/repo-grade`를 돌렸는데
+  총평 행이 나오지 않았다. 화면 상단 `Base directory: ...agentic-lab\.claude\skills\repo-grade` —
+  **같은 이름이면 로컬 스킬이 플러그인을 가린다.** 업데이트가 안 된 게 아니라 보이지 않았을 뿐이었다.
+  슬라이드 148의 "한쪽을 진실로 정하라"가 취향 문제가 아니라 검증 가능성의 문제였다
+- **관찰 2 (경로 문제와 권한 문제는 증상이 같다)**: 커맨드가 상대경로 `skills/repo-grade`를 쓰는 걸 발견하고
+  `${CLAUDE_PLUGIN_ROOT}` 기준으로 고쳤는데(`93b45c7`) 증상이 그대로였다 — 루브릭을 못 찾아 A~E 대신
+  9항목 배점을 지어냈다. 원인은 경로가 아니라 `-p` 모드의 디렉터리 샌드박스였고,
+  `--add-dir`로 캐시를 열자 즉시 통과했다. 둘 다 "파일을 못 읽는다"로 나타나 구분이 안 됐다
+- **관찰 3 (커맨드는 왜 얇아야 하나)**: 내 커맨드는 "스킬 파일을 읽어라"라고 시킨다 — 그래서 읽기 권한에
+  의존한다. 스킬은 `luna-toolkit:repo-grade`로 자동 등록되므로 애초에 읽으라고 시킬 필요가 없었다.
+  얇은 커맨드가 좋은 건 미학이 아니라 **의존성이 하나 줄어들기 때문**이었다
+- **갱신 정책 ("안 하는 사람 대책", 이론 58)**: 우리 팀 문장 — **"매주 수요일 수업 시작 = update 타임."**
+  누가 갱신했는지 묻지 않는다. 세션을 새로 열 때 `/plugin marketplace update luna` 한 줄을 치는 것을
+  출석처럼 다룬다. 강제할 수단이 없는 규칙은 시각에 묶어야 지켜진다
+- **관찰 4 (실패는 조용하다)**: `marketplace add`에 없는 경로를 줬을 때 에러 없이 아무 출력도 없었다.
+  다음 줄 `install`의 `Marketplace "luna" not found`로 거슬러 올라가서야 알았다.
+  등록 여부의 진짜 확인처는 `~/.claude/plugins/known_marketplaces.json`
 
 ### LAB 06
 
@@ -164,9 +191,28 @@
 
 ### LAB 10
 
-- **산출물 경로**:
-- **핵심 증거**:
-- **관찰**:
+- **산출물 경로**: `scripts/hooks/bash-guard.sh` (4패턴 Prevent), `.claude/settings.json` PostToolUse(Detect),
+  `.claude/audit.log` (75줄 축적). ◇10-5 worktree 격리는 미실시
+- **핵심 증거 (10-1·10-2 Prevent)**: 커밋 `9fed790`은 인라인 한 줄 훅이었고 **실제로는 아무것도 막지 못했다**.
+  원인 둘 — `$CLAUDE_TOOL_INPUT`은 존재하지 않는 변수라(입력은 stdin JSON) grep이 빈 문자열을 훑었고,
+  `exit 1`은 차단이 아니라 경고다. `9a984cb`에서 `scripts/hooks/bash-guard.sh`로 분리 + `exit 2`로 수정.
+  검증: 위험 명령 시도 → BLOCKED(exit 2), 대상 폴더 보존, `npm test` 13/13 pass
+- **핵심 증거 (10-3·10-4 Detect·판독)**: LAB 05 진행 중 `git reset --hard`를 시도했다가 실제로 차단당했고,
+  그 명령은 `audit.log`에 **0건**이다(`grep "reset --hard"` → No matches). 로그에 남은 건 20:07:10의
+  우회 명령 `git reset -q HEAD^`뿐 — Prevent에서 죽은 명령은 Detect에 도달하지 않는다.
+  PostToolUse는 이름 그대로 실행 *후*에 돌기 때문
+- **관찰 1 (층의 순서를 로그의 부재로 배웠다)**: audit.log만 보면 그 시각에 아무 일도 없었던 것처럼 보인다.
+  "무엇을 막았는가"는 Prevent 층에만 있고 Detect 층에는 없다 — 사고 조사를 로그로만 하면
+  **차단당한 시도는 통계에서 통째로 사라진다.** 두 층은 겹치는 게 아니라 서로를 못 본다
+- **관찰 2 (가드는 정상 작업도 막는다, 그게 설계다)**: 되돌리기가 필요해 `git reset --hard`를 쓰려다 막혔고,
+  `git checkout <sha> -- .` → `git reset HEAD^`로 우회해야 했다. 패턴이
+  `rm[[:space:]]+-[a-zA-Z]*[rR]`이라 `rm -rf`뿐 아니라 **`rm -r`도 걸린다** —
+  실습 폴더 삭제조차 에이전트에게 못 시켰다. over-guarding을 불평 대신 우회 경로로 처리한 건,
+  가드를 넓게 잡은 게 의도였기 때문. 좁히는 순간 이유를 대야 한다
+- **관찰 3 (Detect 층 자체가 취약했다)**: audit 훅은 `sed`로 JSON에서 `"command"`를 뽑는데,
+  값 안에 이스케이프된 따옴표가 많은 명령을 만나자 **tool_use 응답 전체가 한 줄로 들어가** 로그가 오염됐다
+  (일부 줄은 수천 자, `grep`이 binary로 판정). 막는 훅은 틀리면 시끄럽게 실패하지만(BLOCKED),
+  기록하는 훅은 틀려도 조용히 쓰레기를 쌓는다 — Detect 층은 스스로 자기 고장을 알리지 않는다
 
 ### LAB 11
 
@@ -176,6 +222,15 @@
 
 ## 종합 관찰 3줄
 
-1.
-2.
-3.
+1. **규칙은 판정 가능한 형태가 됐을 때 비로소 규칙이 됐다.** LAB 01에서 "결제 로그에 `console.log` 금지"
+   한 문장이 두 가지로 읽힌다는 걸 알았지만, 문서를 고쳐도 애매함은 문장 안에 남았다.
+   같은 규칙이 LAB 06·10에서 훅으로 내려오자 exit code 하나로 판정이 끝났다 —
+   문서는 해석을 요구하고, 훅은 해석을 끝낸다. 헌법에서 가드로 내려오는 이번 주의 순서가 그 거리였다.
+2. **내가 만든 검사기가 나를 먼저 잡았다.** LAB 02의 루브릭은 내가 방금 추가한 줄 때문에 B를 감점했고,
+   LAB 10의 가드는 내 복구 명령(`git reset --hard`)을 막아 우회로를 찾게 했다.
+   규칙을 자산으로 만든다는 건 남에게 줄 도구를 만드는 게 아니라,
+   **자기 자신에게 먼저 적용되는 걸 감수하는 일**이었다. 불편했지만 한 번도 끄고 싶지는 않았다.
+3. **이번 주의 실패는 전부 조용했다.** `marketplace add`는 없는 경로에 무반응이었고,
+   인라인 Bash 훅은 안 막으면서 아무 말이 없었고, audit 훅은 오염된 로그를 계속 쌓았고,
+   로컬 스킬은 플러그인을 가리면서 아무것도 알리지 않았다. 에러는 시끄럽지만 **미동작은 침묵**이다.
+   그래서 이번 주에 배운 검증법은 하나로 요약된다 — 밖으로 나가서, 없어야 할 것이 없는지 확인한다.
