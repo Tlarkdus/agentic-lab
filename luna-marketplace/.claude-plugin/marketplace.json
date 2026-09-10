@@ -1,0 +1,12 @@
+{
+  "name": "luna",
+  "owner": { "name": "Tlarkdus" },
+  "plugins": [
+    {
+      "name": "luna-plugin",
+      "source": "./luna-plugin",
+      "description": "팀 표준 배포 플러그인. 저장소 채점(repo-grade)과 기본 가드 훅을 담는다.",
+      "version": "0.1.0"
+    }
+  ]
+}
