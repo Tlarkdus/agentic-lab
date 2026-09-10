@@ -1,6 +1,0 @@
-{
-  "name": "luna-plugin",
-  "description": "저장소를 AI-Ready 루브릭으로 채점하는 /repo-grade 커맨드와 스킬. 팀 기본 가드 훅은 LAB 06·10에서 추가.",
-  "version": "0.1.0",
-  "author": { "name": "Tlarkdus" }
-}
