@@ -23,7 +23,10 @@ root=$(printf '%s' "${CLAUDE_PROJECT_DIR:-.}" | tr "$bs" '/')
 files=$(git -C "$root" diff --cached --name-only --diff-filter=ACM 2>/dev/null)
 [ -z "$files" ] && exit 0
 
+# 문서는 면제 — 차단 캡처를 증거로 실은 보고서가 자기 자신에게 막힌다.
+# (이 파일이 낱말을 쪼개 쓰는 것과 같은 이유. tdd-guard.sh의 "면제가 절반"과 같은 모양)
 hits=$(printf '%s\n' "$files" | while IFS= read -r f; do
+  case "${f##*/}" in *.md) continue ;; esac
   [ -f "$root/$f" ] && grep -lIE "$pattern" "$root/$f"
 done)
 
