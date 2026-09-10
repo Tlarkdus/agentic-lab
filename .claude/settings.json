@@ -23,6 +23,17 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "i=$(cat); c=$(printf '%s' \"$i\" | sed -n 's/.*\"command\"[[:space:]]*:[[:space:]]*\"\\([^\"]*\\)\".*/\\1/p' | head -1); echo \"$(date '+%F %T') | $c\" >> \"${CLAUDE_PROJECT_DIR:-.}/.claude/audit.log\" 2>/dev/null; exit 0"
+          }
+        ]
+      }
     ]
   }
 }
