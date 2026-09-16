@@ -17,7 +17,7 @@
 - 활성 결제 코드: `src/payments/` — **여기만 수정한다.**
 - `src/billing/`, `src/old/`: DEPRECATED. 수정·import·참고 전부 금지 — 같은 이름의 함수가 있어도 죽은 코드다.
 - 로거: `lib/logger.js` / 테스트: `tests/` / 상세 규칙: `docs/payment-rules.md`, `src/payments/.agent-rules.md`
-- `.claude/`: 커맨드 `commands/payment-feature.md` (`/payment-feature`), 스킬 `skills/repo-grade/` (`/repo-grade`)
+- `.claude/`: 커맨드 `payment-feature`·`review`, 스킬 5종(`repo-grade`·`wiki-ingest`·`wiki-query`·`wiki-lint`·`lab-onboard`) / 훅 스크립트는 `scripts/hooks/` (tdd·todo·bash 가드, 비용 리포트)
 
 ## 명령어
 
