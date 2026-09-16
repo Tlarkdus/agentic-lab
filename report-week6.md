@@ -251,7 +251,7 @@
 ### LAB 10
 
 - **산출물 경로**: `scripts/hooks/bash-guard.sh` (4패턴 Prevent), `.claude/settings.json` PostToolUse(Detect),
-  `.claude/audit.log` (75줄 축적). ◇10-5 worktree 격리는 미실시
+  `.claude/audit.log` (75줄 축적), `../lab-exp` worktree(`feat-exp` 브랜치)
 - **핵심 증거 (10-1·10-2 Prevent)**: 커밋 `9fed790`은 인라인 한 줄 훅이었고 **실제로는 아무것도 막지 못했다**.
   원인 둘 — `$CLAUDE_TOOL_INPUT`은 존재하지 않는 변수라(입력은 stdin JSON) grep이 빈 문자열을 훑었고,
   `exit 1`은 차단이 아니라 경고다. `9a984cb`에서 `scripts/hooks/bash-guard.sh`로 분리 + `exit 2`로 수정.
@@ -268,6 +268,11 @@
   `rm[[:space:]]+-[a-zA-Z]*[rR]`이라 `rm -rf`뿐 아니라 **`rm -r`도 걸린다** —
   실습 폴더 삭제조차 에이전트에게 못 시켰다. over-guarding을 불평 대신 우회 경로로 처리한 건,
   가드를 넓게 잡은 게 의도였기 때문. 좁히는 순간 이유를 대야 한다
+- **핵심 증거 (10-5 Contain)**: `git worktree list` → `C:/Users/sgy46/lab-exp  9cd5c16 [feat-exp]`.
+  실험 커밋 `9cd5c16 feat: 학번 마스킹 실험 유틸 추가`(`src/wild-idea.js` + `tests/wild-idea.test.js`)는
+  `feat-exp`에만 쌓였고 본진 `main`에는 `src/wild-idea.js`가 **없다**. `git diff main feat-exp`로
+  양방향 확인. worktree에도 `.claude/settings.json`과 `scripts/hooks/`가 그대로 따라온다 —
+  **격리는 됐지만 무법지대는 아니다**
 - **관찰 3 (Detect 층 자체가 취약했다)**: audit 훅은 `sed`로 JSON에서 `"command"`를 뽑는데,
   값 안에 이스케이프된 따옴표가 많은 명령을 만나자 **tool_use 응답 전체가 한 줄로 들어가** 로그가 오염됐다
   (일부 줄은 수천 자, `grep`이 binary로 판정). 막는 훅은 틀리면 시끄럽게 실패하지만(BLOCKED),
