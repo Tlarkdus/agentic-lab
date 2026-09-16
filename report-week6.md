@@ -143,6 +143,11 @@
   `src/payments/coupon.js` → 무출력 exit 0(통과) / `tests/coupon.test.js` → 면제로 통과 /
   `src/payments/tax.js` → `{"permissionDecision":"deny", ... "TDD GUARD: tax 테스트가 없습니다.
   테스트를 먼저 작성하세요 (예: tests/tax.test.js)"}`
+- **캡처 (6-2 재현, 2026-09-16)**: `docs/img/lab06-tdd-guard.png` — 테스트 없는 `src/payments/shipping.js`에
+  Write를 시도하자 `Error: TDD GUARD: shipping 테스트가 없습니다. 테스트를 먼저 작성하세요
+  (예: tests/shipping.test.js)`로 거부됐고 파일은 생성되지 않았다(`Test-Path` → False)
+
+  ![TDD GUARD 차단 화면](docs/img/lab06-tdd-guard.png)
 - **핵심 증거 (6-4 RED→GREEN 한 사이클)**: `fc62d9a feat: coupon with tdd-guard`
   (`src/payments/coupon.js` +28, `tests/coupon.test.js` +16 — 테스트와 구현이 한 커밋).
   3케이스 GREEN: 정상 할인(10000에 10% → `netMinor` 9000) / `rate <= 0` → `RangeError` /
