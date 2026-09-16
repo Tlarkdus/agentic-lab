@@ -2,3 +2,4 @@
 
 - 2026-09-08 | ingest | `raw/2026-08-06-week5.md`, `raw/2026-08-12-week6.md` → 신규 `decision/repo-standards.md`, `decision/team-toolchain.md`, `decision/audit-log.md`, `postmortem/observations.md`, `index.md`
 - 2026-09-08 | onboard | `_index/knowledge-map.md` 생성 (주제 7개, 누락 의심 5건)
+- 2026-09-16 | ingest | `_incident/incident-A.log` + triage 리포트 → 신규 `postmortem/payment-pool-exhaustion.md`, `decision/triage-gate.md`; `index.md` 2행 추가

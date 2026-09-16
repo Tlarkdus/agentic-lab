@@ -7,10 +7,12 @@
 - [[repo-standards]] `solid` — 검증 게이트 `npm test` 통일, `CLAUDE.md` 35줄 이내 (모순/주의 있음)
 - [[team-toolchain]] `solid` — 표준 배포 `luna-plugin`(main 추종), TDD 가드·Bash 가드레일 기본 훅
 - [[audit-log]] `draft` — audit log 상시 활성화 시점. 미결, 7주차 논의
+- [[triage-gate]] `draft` — 장애 에스컬레이션 2×2(Confidence × Blast). 임계 미조정
 
 ## 관찰 (`postmortem/`)
 
 - [[observations]] `solid` — 규칙 도입 후 일관성 개선(47% 기준), 훅 변경은 새 세션부터 반영
+- [[payment-pool-exhaustion]] `draft` — 배포 직후 pool 고갈(교재용 가짜 장애). 교훈: 배포 후 30분 pool 감시
 
 ## 원본 (`raw/`, 수정 금지)
 
