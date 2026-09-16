@@ -9,7 +9,7 @@
 - [x] LAB 05
 - [x] LAB 06
 - [ ] LAB 07
-- [ ] LAB 08
+- [x] LAB 08
 - [ ] LAB 09
 - [x] LAB 10
 - [ ] LAB 11
