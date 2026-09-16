@@ -97,5 +97,10 @@ const pct = (v) => (v === null ? '-' : (v * 100).toFixed(1) + '%');
 console.log(`\n총 ${(inTotal + total.output).toLocaleString('en-US')} tokens · ` +
   `출력 ${total.output.toLocaleString('en-US')} · 입력 ${inTotal.toLocaleString('en-US')}(캐시 포함) · ` +
   `출력:입력 = ${ratio}`);
+// cost gate — 임계 초과면 경고를 같은 줄에 붙인다 (중단이 아니라 보고)
+const gate = Number(process.env.TOKEN_GATE_OUTPUT) || 0;
+const overGate = gate > 0 && total.output > gate;
+
 console.log(`캐시 히트율 ${pct(hr)} (실질 ${pct(rhr)}) · ` +
-  `turns ${total.turns.toLocaleString('en-US')} · usage 없는 줄 ${skipped.toLocaleString('en-US')}`);
+  `turns ${total.turns.toLocaleString('en-US')} · usage 없는 줄 ${skipped.toLocaleString('en-US')}` +
+  (overGate ? `  ⚠ output ${total.output.toLocaleString('en-US')} > gate ${gate.toLocaleString('en-US')}` : ''));
