@@ -1,0 +1,18 @@
+2026-09-15 03:08:41 INFO  payment-service  health check ok (pool: 12/50 active)
+2026-09-15 03:10:02 INFO  deploy-bot       deploy: payment-service v2.3.1 (prev v2.3.0) by ci
+2026-09-15 03:10:47 INFO  payment-service  started, pool size=50, idle_timeout=30s
+2026-09-15 03:11:55 WARN  payment-service  pool usage 41/50 (82%)
+2026-09-15 03:12:03 ERROR payment-service  DB connection timeout (pool exhausted) order=ord_88412
+2026-09-15 03:12:04 ERROR payment-service  DB connection timeout (pool exhausted) order=ord_88413
+2026-09-15 03:12:09 ERROR payment-service  DB connection timeout (pool exhausted) order=ord_88417
+2026-09-15 03:12:31 ERROR payment-service  DB connection timeout (pool exhausted) x37 in last 60s
+2026-09-15 03:13:00 WARN  payment-service  pool usage 50/50 (100%), queue depth 214
+2026-09-15 03:13:44 ERROR payment-service  DB connection timeout (pool exhausted) x52 in last 60s
+2026-09-15 03:14:10 INFO  db-primary       connections 50 from payment-service, no slow query (p99 18ms)
+2026-09-15 03:15:00 ERROR api-gateway      checkout API 5xx rate 34% (baseline 0.2%)
+2026-09-15 03:15:30 ERROR payment-service  DB connection timeout (pool exhausted) x61 in last 60s
+2026-09-15 03:16:12 WARN  api-gateway      checkout p95 latency 8,400ms (baseline 210ms)
+2026-09-15 03:17:00 ERROR api-gateway      checkout API 5xx rate 39%
+2026-09-15 03:18:22 INFO  refund-service   unaffected, pool 3/50
+2026-09-15 03:19:05 ERROR payment-service  DB connection timeout (pool exhausted) x58 in last 60s
+2026-09-15 03:20:00 ERROR api-gateway      checkout API 5xx rate 41%, 1,183 failed orders since 03:12
